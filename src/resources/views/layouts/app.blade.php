@@ -32,8 +32,8 @@
                 @else
                     <a class="header__nav-link" href="{{ route('login') }}">ログイン</a>
                 @endauth
-                <a class="header__nav-link" href="{{ route('mypage') }}">マイページ</a>
-                <a class="header__nav-btn" href="{{ route('sell') }}">出品</a>
+                <a class="header__nav-link" href="{{ route('mypage.index') }}">マイページ</a>
+                <a class="header__nav-btn" href="{{ route('items.create') }}">出品</a>
             </nav>
         </div>
     </header>

@@ -1,0 +1,93 @@
+:root {
+    --color-red: rgb(241, 66, 31);
+    --color-blue: rgb(21, 61, 223);
+    --color-gray: rgb(160, 160, 160);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+}
+
+/* ヘッダー */
+.header {
+    background-color: #000;
+    padding: 12px 20px;
+}
+
+.header__inner {
+    max-width: 1230px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.header__logo img {
+    height: 40px;
+    display: block;
+}
+
+.header__search {
+    flex: 0.7;
+}
+
+.header__search-form {
+    width: 100%;
+}
+
+.header__search-input {
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #000;
+    outline: none;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+}
+
+.header__nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.header__nav-link:hover {
+    opacity: 0.8;
+}
+
+.header__logout-form {
+    margin: 0;
+}
+
+.header__nav-btn {
+    color: #000;
+    background-color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.header__nav-btn:hover {
+    opacity: 0.8;
+}
