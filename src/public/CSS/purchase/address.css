@@ -1,0 +1,56 @@
+.address {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.address__title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.address__group {
+    margin-bottom: 40px;
+}
+
+.address__label {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.address__input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.address__error {
+    color: var(--color-red);
+    font-size: 12px;
+    margin-top: 4px;
+    min-height: 18px;
+}
+
+.address__btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-red);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.address__btn:hover {
+    opacity: 0.8;
+}

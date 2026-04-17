@@ -8,6 +8,10 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Auth\RegisterController;
+
+Route::get('/register', [RegisterController::class, 'show'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');

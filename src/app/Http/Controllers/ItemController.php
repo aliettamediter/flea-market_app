@@ -25,7 +25,7 @@ class ItemController extends Controller
             $likedItems = auth()->user()->likes()
                 ->with('item')
                 ->get()
-                ->pluck('item')
+                ->pluck('item');
             if ($request->filled('search')) {
                 $likedItems = $likedItems->filter(function ($item) use ($request) {
                     return str_contains($item->name, $request->search);

@@ -1,0 +1,153 @@
+.purchase {
+    max-width: 1230px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.purchase__form {
+    width: 100%;
+}
+
+.purchase__inner {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: 40px;
+}
+
+.purchase__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.purchase__item-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.purchase__item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.purchase__item-price {
+    font-size: 18px;
+}
+
+.purchase__border {
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.purchase__section {
+    margin-bottom: 60px;
+}
+
+.purchase__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.purchase__section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.purchase__select-wrap {
+    position: relative;
+}
+
+.purchase__select-wrap::after {
+    content: '▼';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 14px;
+    color: #555;
+}
+
+.purchase__select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 17px;
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.purchase__change-link {
+    color: var(--color-blue);
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.purchase__change-link:hover {
+    text-decoration: underline;
+}
+
+.purchase__address {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.purchase__error {
+    color: var(--color-red);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.purchase__summary {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.purchase__summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.purchase__summary-row--border {
+    border-top: 1px solid #ccc;
+}
+
+.purchase__summary-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.purchase__summary-value {
+    font-size: 16px;
+}
+
+.purchase__btn {
+    margin-top: 50px;
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-red);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.purchase__btn:hover {
+    opacity: 0.8;
+}

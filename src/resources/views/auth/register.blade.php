@@ -10,6 +10,11 @@
         <form class="register__form" method="POST" action="/register" novalidate>
             @csrf
             <div class="register__group">
+                <label class="register__label" for="name">ユーザー名</label>
+                <input class="register__input" type="text" name="name" id="name" value="{{ old('name') }}">
+                <p class="register__error">@error('name'){{ $message }}@enderror</p>
+            </div>
+            <div class="register__group">
                 <label class="register__label" for="email">メールアドレス</label>
                 <input class="register__input" type="email" name="email" id="email" value="{{ old('email') }}">
                 <p class="register__error">@error('email'){{ $message }}@enderror</p>

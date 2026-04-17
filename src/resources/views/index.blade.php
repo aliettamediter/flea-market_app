@@ -15,7 +15,7 @@
             @endauth
         </div>
         <div class="item__list">
-            @if($tab === 'mylist')
+            @if($tab === 'mylist' && auth()->check())
                 @forelse($likedItems as $item)
                     <div class="item__card">
                         <a class="item__link" href="{{ route('items.show', $item) }}">
