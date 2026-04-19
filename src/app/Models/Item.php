@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,13 @@ class Item extends Model
     'status',
     'image',
     ];
+    public function scopeSearch(Builder $query, ?string $keyword): Builder
+    {
+        return $query->when(
+            $keyword,
+            fn (Builder $q) => $q->where('name', 'like', '%' . $keyword . '%')
+        );
+    }
     public function categories()
     {
     return $this->belongsToMany(Category::class);
