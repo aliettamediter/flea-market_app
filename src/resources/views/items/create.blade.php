@@ -7,7 +7,7 @@
 @section('content')
     <div class="exhibit">
         <h1 class="exhibit__title">商品の出品</h1>
-        <form class="exhibit__form" method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data"
+        <form class="exhibit__form" method="POST" action="{{ route('sell.store') }}" enctype="multipart/form-data"
             novalidate>
             @csrf
             <div class="exhibit__section">
