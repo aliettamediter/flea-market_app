@@ -12,17 +12,19 @@ class CreateNewUser implements CreatesNewUsers
 {
     public function create(array $input)
     {
-        $registerRequest = new RegisterRequest();
+        file_put_contents(storage_path('logs/test.log'), print_r($input, true));
+
         Validator::make(
             $input,
-            $registerRequest->rules(),
-            $registerRequest->messages()
+            (new RegisterRequest())->rules(),
+            (new RegisterRequest())->messages()
         )->validate();
 
         $user = User::create([
-            'email' => $input['email'],
+            'email'    => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
         $user->profile()->create([
             'name' => $input['name'],
         ]);

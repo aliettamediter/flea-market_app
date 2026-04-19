@@ -16,7 +16,7 @@ class ExhibitionRequest extends FormRequest
         return [
             'name'          => 'required|string|max:100',
             'description'   => 'required|string|max:255',
-            'price'         => 'required|integer|min:0',
+            'price'         => 'required|integer|min:0|max:9999999',
             'category_id'   => 'required|array',
             'category_id.*' => 'exists:categories,id',
             'condition_id'  => 'required|exists:conditions,id',
