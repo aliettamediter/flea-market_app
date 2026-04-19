@@ -31,6 +31,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/email/verify');
+        return redirect()->route('verification.notice');
     }
 }
