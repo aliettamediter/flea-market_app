@@ -17,8 +17,8 @@ Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
-    Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/sell', [ItemController::class, 'create'])->name('sell');
+    Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
     Route::post('/items/{item}/like', [LikeController::class, 'store'])->name('items.like.store');
     Route::delete('/items/{item}/like', [LikeController::class, 'destroy'])->name('items.like.destroy');
     Route::post('/items/{item}/comments', [CommentController::class, 'store'])->name('items.comments.store');
