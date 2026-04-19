@@ -12,27 +12,23 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Item::query();
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        }
-        if (auth()->check()) {
-            $query->where('user_id', '!=', auth()->id());
-        }
-        $items = $query->get();
-        $likedItems = collect();
-        if (auth()->check()) {
-            $likedItems = auth()->user()->likes()
-                ->with('item')
+        $user = auth()->user();
+        $search = $request->input('search');
+
+        $items = Item::query()
+            ->search($search)
+            ->when($user, fn ($q) => $q->where('user_id', '!=', $user->id))
+            ->get();
+
+        $likedItems = $user
+            ? Item::query()
+                ->search($search)
+                ->whereIn('id', $user->likes()->pluck('item_id'))
                 ->get()
-                ->pluck('item');
-            if ($request->filled('search')) {
-                $likedItems = $likedItems->filter(function ($item) use ($request) {
-                    return str_contains($item->name, $request->search);
-                });
-            }
-        }
+            : collect();
+
         $tab = $request->get('tab', 'recommend');
+
         return view('index', compact('items', 'likedItems', 'tab'));
     }
 
