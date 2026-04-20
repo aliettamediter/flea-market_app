@@ -14,12 +14,14 @@ class PaymentController extends Controller
 {
     public function create(Item $item)
     {
+        abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         $user = auth()->user();
         return view('purchase.confirm', compact('user', 'item'));
     }
 
     public function store(PurchaseRequest $request, Item $item)
     {
+        abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         Stripe::setApiKey(config('services.stripe.secret'));
         $paymentMethod = $request->payment_method;
         $paymentMethodType = $paymentMethod === 'credit_card' ? ['card'] : ['konbini'];
@@ -62,12 +64,14 @@ class PaymentController extends Controller
 
     public function editAddress(Item $item)
     {
+        abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         $user = auth()->user();
         return view('purchase.address', compact('user', 'item'));
     }
 
     public function updateAddress(AddressRequest $request, Item $item)
     {
+        abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         $user = auth()->user();
         $user->profile->update([
             'postal_code' => $request->postal_code,
