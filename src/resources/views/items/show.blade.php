@@ -51,7 +51,7 @@
                         {{ $item->comments->count() }}
                     </span>
                 </div>
-                @if(!$item->isSoldOut())
+                @if(!$item->isSoldOut() && $item->user_id !== auth()->id())
                     <a class="item-detail__buy-btn" href="{{ route('purchase.create', $item) }}">購入手続きへ</a>
                 @endif
                 <div class="item-detail__section">
