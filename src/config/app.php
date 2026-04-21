@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'mail_ui_url' => env('MAIL_UI_URL', 'http://localhost:8025'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
