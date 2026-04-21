@@ -26,7 +26,9 @@
                     <div class="exhibit__categories">
                         @foreach($categories as $category)
                             <label class="exhibit__category-label">
-                                <input class="exhibit__category-input" type="checkbox" name="category_id[]"value="{{ $category->id }}"{{ in_array($category->id, old('category_id', [])) ? 'checked' : '' }}>
+                                <input class="exhibit__category-input" type="checkbox" name="category_id[]"
+                                    value="{{ $category->id }}"
+                                    {{ in_array($category->id, old('category_id', [])) ? 'checked' : '' }}>
                                 <span class="exhibit__category-tag">{{ $category->name }}</span>
                             </label>
                         @endforeach
@@ -108,14 +110,12 @@
         }
 
         document.querySelectorAll('.exhibit__category-input').forEach(function (input) {
+            if (input.checked) {
+                input.nextElementSibling.classList.add('exhibit__category-tag--active');
+            }
             input.addEventListener('change', function () {
                 this.nextElementSibling.classList.toggle('exhibit__category-tag--active', this.checked);
             });
-            document.querySelectorAll('.exhibit__category-input').forEach(function (input) {
-                if (input.checked) {
-                    input.nextElementSibling.classList.add('exhibit__category-tag--active');
-                }
-            });
-        })
+        });
     </script>
 @endsection

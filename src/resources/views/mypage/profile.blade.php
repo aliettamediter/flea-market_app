@@ -51,27 +51,26 @@
 @endsection
 
 @section('js')
-    @section('js')
-        <script>
-            const profileImageInput = document.getElementById('profile_image');
-            const previewImage = document.getElementById('profile-preview');
-            const placeholder = document.getElementById('profile-placeholder');
-            if (profileImageInput && previewImage) {
-                profileImageInput.addEventListener('change', function (event) {
-                    const file = event.target.files[0];
-                    if (!file || !file.type.startsWith('image/')) {
-                        return;
+    <script>
+        const profileImageInput = document.getElementById('profile_image');
+        const previewImage = document.getElementById('profile-preview');
+        const placeholder = document.getElementById('profile-placeholder');
+        if (profileImageInput && previewImage) {
+            profileImageInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (!file || !file.type.startsWith('image/')) {
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    previewImage.src = loadEvent.target.result;
+                    previewImage.style.display = 'block';
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
                     }
-                    const reader = new FileReader();
-                    reader.onload = function (loadEvent) {
-                        previewImage.src = loadEvent.target.result;
-                        previewImage.style.display = 'block';
-                        if (placeholder) {
-                            placeholder.style.display = 'none';
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-        </script>
-    @endsection
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+@endsection
