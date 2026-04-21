@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    @php
+        $isMyList     = $tab === 'mylist' && auth()->check();
+        $displayItems = $isMyList ? $likedItems : $items;
+        $emptyMessage = $isMyList ? 'いいねした商品はありません' : '商品がありません';
+    @endphp
     <div class="item">
         <div class="item__tab">
             <a href="{{ route('items.index', ['tab' => 'recommend', 'search' => request('search')]) }}"
@@ -15,39 +20,21 @@
             @endauth
         </div>
         <div class="item__list">
-            @if($tab === 'mylist' && auth()->check())
-                @forelse($likedItems as $item)
-                    <div class="item__card">
-                        <a class="item__link" href="{{ route('items.show', $item) }}">
-                            <div class="item__img-wrap">
-                                <img class="item__img" src="{{ $item->image_url }}" alt="{{ $item->name }}">
-                                @if($item->status === 'sold')
-                                    <div class="item__sold">Sold</div>
-                                @endif
-                            </div>
-                            <p class="item__name">{{ $item->name }}</p>
-                        </a>
-                    </div>
-                @empty
-                    <p class="item__empty">いいねした商品はありません</p>
-                @endforelse
-            @else
-                @forelse($items as $item)
-                    <div class="item__card">
-                        <a class="item__link" href="{{ route('items.show', $item) }}">
-                            <div class="item__img-wrap">
-                                <img class="item__img" src="{{ $item->image_url }}" alt="{{ $item->name }}">
-                                @if($item->status === 'sold')
-                                    <div class="item__sold">Sold</div>
-                                @endif
-                            </div>
-                            <p class="item__name">{{ $item->name }}</p>
-                        </a>
-                    </div>
-                @empty
-                    <p class="item__empty">商品がありません</p>
-                @endforelse
-            @endif
+            @forelse($displayItems as $item)
+                <div class="item__card">
+                    <a class="item__link" href="{{ route('items.show', $item) }}">
+                        <div class="item__img-wrap">
+                            <img class="item__img" src="{{ $item->image_url }}" alt="{{ $item->name }}">
+                            @if($item->status === 'sold')
+                                <div class="item__sold">Sold</div>
+                            @endif
+                        </div>
+                        <p class="item__name">{{ $item->name }}</p>
+                    </a>
+                </div>
+            @empty
+                <p class="item__empty">{{ $emptyMessage }}</p>
+            @endforelse
         </div>
     </div>
 @endsection

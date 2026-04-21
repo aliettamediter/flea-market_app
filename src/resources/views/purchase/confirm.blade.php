@@ -38,7 +38,9 @@
                             <a class="purchase__change-link" href="{{ route('purchase.address.edit', $item) }}">変更する</a>
                         </div>
                         <p class="purchase__address">〒{{ $user->profile->postal_code ?? '' }}</p>
-                        <p class="purchase__address">{{ $user->profile->address ?? '' }} {{ $user->profile->building }}</p>
+                        <p class="purchase__address">
+                            {{ trim(($user->profile->address ?? '') . ' ' . ($user->profile->building ?? '')) }}
+                        </p>
                     </div>
                     <div class="purchase__border"></div>
                 </div>

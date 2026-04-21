@@ -20,29 +20,27 @@
                 <p class="item-detail__brand">{{ $item->brand }}</p>
                 <p class="item-detail__price">¥{{ number_format($item->price) }}<span class="item-detail__tax">（税込）</span>
                 </p>
+                @php
+                    $isLiked   = auth()->check() && $item->isLikedBy(auth()->user());
+                    $likeImage = $isLiked ? 'heart_logo_pink.png' : 'heart_logo_white.png';
+                    $likeClass = 'item-detail__like-btn' . ($isLiked ? ' item-detail__like-btn--active' : '');
+                @endphp
                 <div class="item-detail__actions">
                     @auth
-                        @if($item->isLikedBy(auth()->user()))
-                            <form method="POST" action="{{ route('items.like.destroy', $item) }}">
-                                @csrf
+                        <form method="POST"
+                            action="{{ $isLiked ? route('items.like.destroy', $item) : route('items.like.store', $item) }}">
+                            @csrf
+                            @if($isLiked)
                                 @method('DELETE')
-                                <button class="item-detail__like-btn item-detail__like-btn--active" type="submit">
-                                    <img src="{{ asset('images/heart_logo_pink.png') }}" alt="いいね">
-                                    {{ $item->likes->count() }}
-                                </button>
-                            </form>
-                        @else
-                            <form method="POST" action="{{ route('items.like.store', $item) }}">
-                                @csrf
-                                <button class="item-detail__like-btn" type="submit">
-                                    <img src="{{ asset('images/heart_logo_white.png') }}" alt="いいね">
-                                    {{ $item->likes->count() }}
-                                </button>
-                            </form>
-                        @endif
+                            @endif
+                            <button class="{{ $likeClass }}" type="submit">
+                                <img src="{{ asset('images/' . $likeImage) }}" alt="いいね">
+                                {{ $item->likes->count() }}
+                            </button>
+                        </form>
                     @else
-                        <span class="item-detail__like-btn">
-                            <img src="{{ asset('images/heart_logo_white.png') }}" alt="いいね">
+                        <span class="{{ $likeClass }}">
+                            <img src="{{ asset('images/' . $likeImage) }}" alt="いいね">
                             {{ $item->likes->count() }}
                         </span>
                     @endauth
@@ -98,9 +96,7 @@
                         <form method="POST" action="{{ route('items.comments.store', $item) }}">
                             @csrf
                             <textarea class="item-detail__textarea" name="body" placeholder="コメントを入力してください"></textarea>
-                            @error('body')
-                                <p class="item-detail__error">{{ $message }}</p>
-                            @enderror
+                            <p class="item-detail__error">@error('body'){{ $message }}@enderror</p>
                             <button class="item-detail__comment-btn" type="submit">コメントを送信する</button>
                         </form>
                     @else
