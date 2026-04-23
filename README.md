@@ -4,7 +4,7 @@
 
 1. リポジトリをクローン
 ```bash
-git clone https://github.com/AliettaA/flea-market_app.git
+git clone https://github.com/aliettamediter/flea-market_app.git
 cd flea-market_app
 ```
 
