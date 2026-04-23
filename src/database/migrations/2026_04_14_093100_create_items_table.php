@@ -13,10 +13,10 @@ class CreateItemsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->string('name');
+            $table->string('brand')->nullable();
             $table->string('description');
             $table->integer('price');
             $table->string('image');
-            $table->string('brand')->nullable();
             $table->enum('status', ['on_sale', 'sold'])->default('on_sale');
             $table->timestamps();
         });
