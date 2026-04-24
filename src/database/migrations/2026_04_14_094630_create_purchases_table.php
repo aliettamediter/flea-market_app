@@ -13,7 +13,7 @@ class CreatePurchasesTable extends Migration
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
             $table->integer('amount');
-            $table->integer('payment_method');
+            $table->string('payment_method');
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
