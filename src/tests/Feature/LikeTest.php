@@ -18,8 +18,6 @@ class LikeTest extends TestCase
         parent::setUp();
         $this->seed(ConditionSeeder::class);
     }
-
-    // いいねした商品として登録される
     public function test_user_can_like_item()
     {
         $user = User::factory()->create();
@@ -34,8 +32,6 @@ class LikeTest extends TestCase
 
         $response->assertRedirect();
     }
-
-    // いいねアイコンが押下された状態では色が変化する
     public function test_liked_item_shows_active_icon()
     {
         $user = User::factory()->create();
@@ -46,13 +42,11 @@ class LikeTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        $response = $this->actingAs($user)->get(route('items.show', $item));
+        $response = $this->actingAs($user)->get(route('item.show', $item));
 
         $response->assertStatus(200);
         $response->assertSee('item-detail__like-btn--active');
     }
-
-    // いいねを解除することができる
     public function test_user_can_unlike_item()
     {
         $user = User::factory()->create();

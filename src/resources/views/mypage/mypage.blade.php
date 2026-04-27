@@ -33,7 +33,7 @@
         <div class="mypage__list">
             @forelse($displayItems as $item)
                 <div class="mypage__card">
-                    <a class="mypage__link" href="{{ route('items.show', $item) }}">
+                    <a class="mypage__link" href="{{ route('item.show', $item) }}">
                         <div class="mypage__img-wrap">
                             <img class="mypage__img" src="{{ $item->image_url }}" alt="{{ $item->name }}">
                             @if($showSoldLabel && $item->status === 'sold')

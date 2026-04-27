@@ -8,7 +8,6 @@ use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
-use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {

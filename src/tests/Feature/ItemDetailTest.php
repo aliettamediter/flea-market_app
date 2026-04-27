@@ -45,7 +45,7 @@ class ItemDetailTest extends TestCase
         ]);
         $item->categories()->attach([1, 2]);
 
-        $response = $this->get(route('items.show', $item));
+        $response = $this->get(route('item.show', $item));
 
         $response->assertStatus(200);
         $response->assertSee('テスト商品');
@@ -61,7 +61,7 @@ class ItemDetailTest extends TestCase
 
         $item->categories()->attach([1, 2, 3]);
 
-        $response = $this->get(route('items.show', $item));
+        $response = $this->get(route('item.show', $item));
 
         $response->assertStatus(200);
         $response->assertViewHas('item', function ($item) {
