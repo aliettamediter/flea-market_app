@@ -18,12 +18,14 @@ class ItemController extends Controller
         $items = Item::query()
             ->search($search)
             ->when($user, fn ($q) => $q->where('user_id', '!=', $user->id))
+            ->with(['likes', 'categories'])
             ->get();
 
         $likedItems = $user
             ? Item::query()
                 ->search($search)
                 ->whereIn('id', $user->likes()->pluck('item_id'))
+                ->with(['likes', 'categories'])
                 ->get()
             : collect();
 
