@@ -34,6 +34,13 @@ class ItemController extends Controller
 
     public function show(Item $item)
     {
+        $item->load([
+            'categories',
+            'condition',
+            'likes',
+            'comments.user.profile',
+        ]);
+
         return view('items.show', compact('item'));
     }
 
