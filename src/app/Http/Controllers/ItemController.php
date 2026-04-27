@@ -43,7 +43,9 @@ class ItemController extends Controller
             'comments.user.profile',
         ]);
 
-        return view('items.show', compact('item'));
+        $isLiked = auth()->check() && $item->isLikedBy(auth()->user());
+
+        return view('items.show', compact('item', 'isLiked'));
     }
 
     public function create()

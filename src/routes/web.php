@@ -11,18 +11,18 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [RegisterController::class, 'show'])->name('register');
+    Route::get('/register',[RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 });
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
+Route::get('/item/{item}', [ItemController::class, 'show'])->name('item.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sell', [ItemController::class, 'create'])->name('sell');
     Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
 
-    Route::prefix('items/{item}')->name('items.')->group(function () {
+    Route::prefix('item/{item}')->name('items.')->group(function () {
         Route::post('/like', [LikeController::class, 'store'])->name('like.store');
         Route::delete('/like', [LikeController::class, 'destroy'])->name('like.destroy');
         Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

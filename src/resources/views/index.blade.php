@@ -22,7 +22,7 @@
         <div class="item__list">
             @forelse($displayItems as $item)
                 <div class="item__card">
-                    <a class="item__link" href="{{ route('items.show', $item) }}">
+                    <a class="item__link" href="{{ route('item.show', $item) }}">
                         <div class="item__img-wrap">
                             <img class="item__img" src="{{ $item->image_url }}" alt="{{ $item->name }}">
                             @if($item->status === 'sold')
