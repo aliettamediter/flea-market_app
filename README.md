@@ -21,24 +21,24 @@ docker-compose up -d
 ※ 以下のコマンドは `docker-compose exec php bash` でコンテナに入った後に実行してください。
 
 4. パッケージのインストール
-\```
+```
 composer install
-\```
+```
 
 5. アプリケーションキーの生成
-\```
+```
 php artisan key:generate
-\```
+```
 
 6. マイグレーションとシーダーの実行
-\```
+```
 php artisan migrate --seed
-\```
+```
 
 7. ストレージのシンボリックリンク作成
-\```
+```
 php artisan storage:link
-\```
+```
 
 ## 機能一覧
 
