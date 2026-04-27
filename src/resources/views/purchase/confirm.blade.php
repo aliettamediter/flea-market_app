@@ -63,15 +63,5 @@
 @endsection
 
 @section('js')
-    <script>
-        const select = document.getElementById('payment_method');
-        const selectedPayment = document.getElementById('selected-payment');
-        const paymentLabels = {
-            'credit_card': 'クレジットカード',
-            'konbini': 'コンビニ払い',
-        };
-        select.addEventListener('change', function () {
-            selectedPayment.textContent = paymentLabels[this.value] || '未選択';
-        });
-    </script>
+    <script src="{{ asset('js/purchase.js') }}"></script>
 @endsection
