@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Item;
-use App\Models\Purchase;
 
 class MypageController extends Controller
 {
@@ -15,9 +13,15 @@ class MypageController extends Controller
         $profile = $user->profile;
         $page = $request->get('page', 'sell');
 
-        $items = $user->items()->latest()->get();
+        $items = $user->items()
+            ->with(['categories', 'likes'])
+            ->latest()
+            ->get();
 
-        $purchases = $user->purchases()->with('item')->latest()->get();
+        $purchases = $user->purchases()
+            ->with('item.categories')
+            ->latest()
+            ->get();
 
         return view('mypage.mypage', compact('user', 'profile', 'items', 'purchases', 'page'));
     }

@@ -16,7 +16,8 @@ class PaymentController extends Controller
     {
         abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         $user = auth()->user();
-        return view('purchase.confirm', compact('user', 'item'));
+        $profile = $user->profile;
+        return view('purchase.confirm', compact('user', 'item', 'profile'));
     }
 
     public function store(PurchaseRequest $request, Item $item)
@@ -38,8 +39,8 @@ class PaymentController extends Controller
                 ],
             ],
             'mode'        => 'payment',
-            'success_url' => url('/purchase/success/' . $item->id) . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url'  => url('/purchase/' . $item->id),
+            'success_url' => route('purchase.success', $item) . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'  => route('purchase.create', $item),
         ]);
         session(['payment_method' => $paymentMethod, 'item_id' => $item->id]);
         return redirect($session->url);
@@ -47,8 +48,6 @@ class PaymentController extends Controller
 
     public function success(Item $item)
     {
-        Log::info('session', ['payment_method' => session('payment_method')]);
-
         Purchase::create([
             'item_id'        => $item->id,
             'buyer_id'       => auth()->id(),
@@ -66,7 +65,8 @@ class PaymentController extends Controller
     {
         abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');
         $user = auth()->user();
-        return view('purchase.address', compact('user', 'item'));
+        $profile = $user->profile;
+        return view('purchase.address', compact('user', 'item', 'profile'));
     }
 
     public function updateAddress(AddressRequest $request, Item $item)
