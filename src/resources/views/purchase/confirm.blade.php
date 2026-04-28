@@ -41,6 +41,11 @@
                         <p class="purchase__address">
                             {{ trim(($user->profile->address ?? '') . ' ' . ($user->profile->building ?? '')) }}
                         </p>
+                        <input type="hidden" name="postal_code" value="{{ $user->profile->postal_code ?? '' }}">
+                        <input type="hidden" name="address" value="{{ $user->profile->address ?? '' }}">
+                        @error('postal_code')
+                            <p class="purchase__error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="purchase__border"></div>
                 </div>
