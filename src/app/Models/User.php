@@ -13,7 +13,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
@@ -23,10 +22,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
     protected $casts = [
-    'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
 ];
-
-    // リレーション
     public function profile()
     {
         return $this->hasOne(Profile::class);

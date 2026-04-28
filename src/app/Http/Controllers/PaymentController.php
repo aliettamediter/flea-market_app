@@ -41,12 +41,25 @@ class PaymentController extends Controller
             'success_url' => route('purchase.success', $item) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url'  => route('purchase.create', $item),
         ]);
-        session(['payment_method' => $paymentMethod, 'item_id' => $item->id]);
+        session([
+            'payment_method' => $paymentMethod,
+            'item_id'        => $item->id,
+            'postal_code'    => $request->postal_code,
+            'address'        => $request->address,
+            'building'       => $request->building,
+        ]);
+
         return redirect($session->url);
     }
 
     public function success(Item $item)
     {
+        \Log::info('purchase session', [
+            'payment_method' => session('payment_method'),
+            'postal_code'    => session('postal_code'),
+            'address'        => session('address'),
+            'building'       => session('building'),
+        ]);
         Purchase::create([
             'item_id'        => $item->id,
             'buyer_id'       => auth()->id(),
@@ -54,12 +67,15 @@ class PaymentController extends Controller
             'payment_method' => session('payment_method'),
             'status'         => 'completed',
             'paid_at'        => now(),
+            'postal_code'    => session('postal_code'),
+            'address'        => session('address'),
+            'building'       => session('building'),
         ]);
+
         $item->update(['status' => 'sold']);
 
         return redirect()->route('items.index');
     }
-
     public function editAddress(Item $item)
     {
         abort_if($item->user_id === auth()->id(), 403, '自身が出品した商品は購入できません');

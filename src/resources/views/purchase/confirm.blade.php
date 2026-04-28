@@ -43,6 +43,7 @@
                         </p>
                         <input type="hidden" name="postal_code" value="{{ $user->profile->postal_code ?? '' }}">
                         <input type="hidden" name="address" value="{{ $user->profile->address ?? '' }}">
+                        <input type="hidden" name="building" value="{{ $user->profile->building ?? '' }}">
                         @error('postal_code')
                             <p class="purchase__error">{{ $message }}</p>
                         @enderror

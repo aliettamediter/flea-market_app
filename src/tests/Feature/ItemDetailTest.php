@@ -53,7 +53,7 @@ class ItemDetailTest extends TestCase
         $response->assertSee('1,000');
         $response->assertSee('テスト商品の説明');
         $response->assertSee('テストコメント');
-        $response->assertSee('1'); // いいね数
+        $response->assertSee('1');
     }
     public function test_item_detail_displays_multiple_categories()
     {
