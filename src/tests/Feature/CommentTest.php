@@ -17,8 +17,6 @@ class CommentTest extends TestCase
         parent::setUp();
         $this->seed(ConditionSeeder::class);
     }
-
-    // ログイン済みのユーザーはコメントを送信できる
     public function test_authenticated_user_can_post_comment()
     {
         $user = User::factory()->create();
@@ -36,8 +34,6 @@ class CommentTest extends TestCase
 
         $response->assertRedirect();
     }
-
-    // ログイン前のユーザーはコメントを送信できない
     public function test_guest_cannot_post_comment()
     {
         $item = Item::factory()->create();
@@ -53,8 +49,6 @@ class CommentTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
-
-    // コメントが入力されていない場合バリデーションメッセージが表示される
     public function test_comment_is_required()
     {
         $user = User::factory()->create();
@@ -66,8 +60,6 @@ class CommentTest extends TestCase
 
         $response->assertSessionHasErrors(['body']);
     }
-
-    // コメントが255文字以上の場合バリデーションメッセージが表示される
     public function test_comment_cannot_exceed_255_characters()
     {
         $user = User::factory()->create();

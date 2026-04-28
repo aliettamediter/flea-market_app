@@ -18,15 +18,22 @@ class PurchaseTest extends TestCase
         parent::setUp();
         $this->seed(ConditionSeeder::class);
     }
-
-    // 購入が完了する
     public function test_user_can_purchase_item()
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
+        $user->profile()->create([
+            'name'        => 'テストユーザー',
+            'postal_code' => '123-4567',
+            'address'     => '東京都渋谷区',
+        ]);
 
-        // セッションに支払い方法をセット
-        session(['payment_method' => 'credit_card']);
+        session([
+            'payment_method' => 'credit_card',
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
+            'building'       => '',
+        ]);
 
         $response = $this->actingAs($user)->get(route('purchase.success', $item));
 
@@ -35,12 +42,12 @@ class PurchaseTest extends TestCase
             'item_id'        => $item->id,
             'payment_method' => 'credit_card',
             'status'         => 'completed',
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
         ]);
 
         $response->assertRedirect(route('items.index'));
     }
-
-    // 購入した商品は「sold」と表示される
     public function test_purchased_item_displays_sold_label()
     {
         $user = User::factory()->create();
@@ -54,9 +61,13 @@ class PurchaseTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Sold');
+        session([
+            'payment_method' => 'credit_card',
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
+            'building'       => '',
+        ]);
     }
-
-    // 購入した商品がプロフィールの購入した商品一覧に追加されている
     public function test_purchased_item_is_added_to_mypage()
     {
         $user = User::factory()->create();

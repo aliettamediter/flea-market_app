@@ -15,6 +15,9 @@ class Purchase extends Model
         'payment_method',
         'status',
         'paid_at',
+        'postal_code',
+        'address',
+        'building',
     ];
     protected $casts = [
         'paid_at' => 'datetime',

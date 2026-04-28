@@ -40,6 +40,25 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
+8. Stripeの設定
+`.env` に以下を追加してください：
+```
+STRIPE_KEY=your_stripe_public_key
+STRIPE_SECRET=your_stripe_secret_key
+```
+
+## テスト実行
+
+※ 以下のコマンドは `docker-compose exec php bash` でコンテナに入った後に実行してください。
+
+テスト用データベースを事前に作成してください（phpMyAdminまたはMySQLで `demo_test` を作成）
+
+テストを実行：
+
+```
+php artisan test
+```
+
 ## 機能一覧
 
 - 会員登録・メール認証
