@@ -93,15 +93,15 @@
                 <div class="item-detail__section">
                     <h2 class="item-detail__section-title">商品へのコメント</h2>
                     @auth
-                        <form method="POST" action="{{ route('items.comments.store', $item) }}">
-                            @csrf
-                            <textarea class="item-detail__textarea" name="body" placeholder="コメントを入力してください"></textarea>
-                            <p class="item-detail__error">@error('body'){{ $message }}@enderror</p>
-                            <button class="item-detail__comment-btn" type="submit">コメントを送信する</button>
-                        </form>
+                    <form method="POST" action="{{ route('items.comments.store', $item) }}">
+                        @csrf
+                        <textarea class="item-detail__textarea" name="body" placeholder="コメントを入力してください"></textarea>
+                        <p class="item-detail__error">@error('body'){{ $message }}@enderror</p>
+                        <button class="item-detail__comment-btn" type="submit">コメントを送信する</button>
+                    </form>
                     @else
-                        <textarea class="item-detail__textarea" placeholder="コメントを入力してください" disabled></textarea>
-                        <button class="item-detail__comment-btn item-detail__comment-btn--disabled" disabled>コメントを送信する</button>
+                        <textarea class="item-detail__textarea" placeholder="コメントを入力してください" readonly></textarea>
+                        <a class="item-detail__comment-btn" href="{{ route('login') }}">コメントを送信する</a>
                     @endauth
                 </div>
             </div>

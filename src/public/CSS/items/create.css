@@ -86,7 +86,7 @@
 .exhibit__categories {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
 }
 
 .exhibit__category-input {
