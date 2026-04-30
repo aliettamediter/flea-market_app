@@ -1,6 +1,9 @@
 # フリマアプリ
+フリマアプリの模擬開発案件です。
+会員登録、ログイン、商品出品、商品購入、コメント、いいね、メール認証などの機能を実装しています。
 
 ## 環境構築
+※ Laravel アプリケーション本体は `src` ディレクトリ配下にあります。
 
 1. リポジトリをクローン
 ```bash
@@ -18,50 +21,81 @@ cp src/.env.example src/.env
 docker-compose up -d
 ```
 
-※ 以下のコマンドは `docker-compose exec php bash` でコンテナに入った後に実行してください。
+4. PHPコンテナに入る
+```bash
+docker-compose exec php bash
+```
 
-4. パッケージのインストール
+5. パッケージのインストール
 ```
 composer install
 ```
 
-5. アプリケーションキーの生成
+6. アプリケーションキーの生成
 ```
 php artisan key:generate
 ```
 
-6. マイグレーションとシーダーの実行
+7. マイグレーションとシーダーの実行
 ```
 php artisan migrate --seed
 ```
 
-7. ストレージのシンボリックリンク作成
+8. ストレージのシンボリックリンク作成
 ```
 php artisan storage:link
 ```
 
-8. Stripeの設定
+9. Stripeの設定
+ 1. [Stripe](https://stripe.com/jp) にアカウントを作成してください
+ 2. ダッシュボードの「開発者」→「APIキー」からテスト用のキーを取得してください
+ 3. `src/.env` に以下を追加してください：
 `.env` に以下を追加してください：
-```
-STRIPE_KEY=your_stripe_public_key
-STRIPE_SECRET=your_stripe_secret_key
-```
+  STRIPE_KEY=取得したPublishableKey
+  STRIPE_SECRET=取得したSecretKey
+  ※ テストカード番号：`4242 4242 4242 4242`（有効期限・CVCは任意の数字）
+
+## メール認証について
+
+本アプリはメール認証にMailhogを使用しています。
+
+1. `http://localhost:8025` にアクセス
+2. 届いた認証メールを開く
+3. 認証リンクをクリック
+※ Dockerコンテナ起動後にMailhogが自動的に起動します。
 
 ## テスト実行
 
-※ 以下のコマンドは `docker-compose exec php bash` でコンテナに入った後に実行してください。
-
-テスト用データベースを事前に作成してください（phpMyAdminまたはMySQLで `demo_test` を作成）
-
-テストを実行：
-
+### 1. テスト用データベースの作成
 ```
-php artisan test
+docker-compose exec mysql bash
+mysql -u root -p
+CREATE DATABASE demo_test;
+```
+
+### 2. .env.testingの作成
+```
+cp src/.env .env.testing
+```
+・２カ所を以下に変更
+APP_ENV=test
+APP_KEY=
+・３カ所を以下に変更
+DB_DATABASE=demo_test
+DB_USERNAME=root
+DB_PASSWORD=root
+
+### 3. テストを実行
+```
+docker-compose exec php bash
+php artisan key:generate --env=testing
+php artisan config:clear
+php artisan migrate --env=testing
 ```
 
 ## 機能一覧
 
-- 会員登録・メール認証
+- 会員登録・メール認証(Mail.hog)
 - ログイン・ログアウト
 - プロフィール設定
 - 商品出品・一覧・詳細
@@ -80,6 +114,7 @@ php artisan test
 | Nginx | 1.21 |
 | Docker | - |
 | Stripe | - |
+| Mailhog | - |
 
 ## テーブル設計
 
