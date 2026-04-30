@@ -22,11 +22,6 @@ class PurchaseTest extends TestCase
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
-        $user->profile()->create([
-            'name'        => 'テストユーザー',
-            'postal_code' => '123-4567',
-            'address'     => '東京都渋谷区',
-        ]);
 
         session([
             'payment_method' => 'credit_card',
@@ -53,7 +48,12 @@ class PurchaseTest extends TestCase
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
-        session(['payment_method' => 'credit_card']);
+        session([
+            'payment_method' => 'credit_card',
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
+            'building'       => '',
+        ]);
 
         $this->actingAs($user)->get(route('purchase.success', $item));
 
@@ -61,12 +61,6 @@ class PurchaseTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Sold');
-        session([
-            'payment_method' => 'credit_card',
-            'postal_code'    => '123-4567',
-            'address'        => '東京都渋谷区',
-            'building'       => '',
-        ]);
     }
     public function test_purchased_item_is_added_to_mypage()
     {
@@ -80,6 +74,9 @@ class PurchaseTest extends TestCase
             'payment_method' => 'credit_card',
             'status'         => 'completed',
             'paid_at'        => now(),
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
+            'building'       => null,
         ]);
 
         $response = $this->actingAs($user)->get('/mypage?page=buy');

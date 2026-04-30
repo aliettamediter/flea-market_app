@@ -38,6 +38,9 @@ class UserProfileTest extends TestCase
             'payment_method' => 'credit_card',
             'status' => 'completed',
             'paid_at' => now(),
+            'postal_code'    => '123-4567',
+            'address'        => '東京都渋谷区',
+            'building'       => null,
         ]);
 
         $response = $this->actingAs($user)->get('/mypage');

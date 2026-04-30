@@ -61,14 +61,24 @@ class AddressTest extends TestCase
             'building'    => '新テストビル',
         ]);
 
-        session(['payment_method' => 'credit_card']);
+        session([
+            'payment_method' => 'credit_card',
+            'postal_code'    => '987-6543',
+            'address'        => '大阪府大阪市',
+            'building'       => '新テストビル',
+        ]);
+
         $this->actingAs($user)->get(route('purchase.success', $item));
+
         $this->assertDatabaseHas('purchases', [
             'buyer_id'       => $user->id,
             'item_id'        => $item->id,
             'payment_method' => 'credit_card',
             'status'         => 'completed',
+            'postal_code'    => '987-6543',
+            'address'        => '大阪府大阪市',
         ]);
+
         $this->assertDatabaseHas('profiles', [
             'user_id'     => $user->id,
             'postal_code' => '987-6543',

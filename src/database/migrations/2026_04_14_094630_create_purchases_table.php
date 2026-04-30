@@ -14,10 +14,13 @@ class CreatePurchasesTable extends Migration
             $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
             $table->integer('amount');
             $table->string('payment_method');
+            $table->string('postal_code');
+            $table->string('address');
+            $table->string('building')->nullable();
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
-});
+        });
     }
 
     public function down()
