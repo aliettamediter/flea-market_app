@@ -23,7 +23,7 @@ class LikeTest extends TestCase
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
-        $response = $this->actingAs($user)->post(route('items.like.store', $item));
+        $response = $this->actingAs($user)->post(route('item.like.store', $item));
 
         $this->assertDatabaseHas('likes', [
             'user_id' => $user->id,
@@ -57,7 +57,7 @@ class LikeTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        $response = $this->actingAs($user)->delete(route('items.like.destroy', $item));
+        $response = $this->actingAs($user)->delete(route('item.like.destroy', $item));
 
         $this->assertDatabaseMissing('likes', [
             'user_id' => $user->id,

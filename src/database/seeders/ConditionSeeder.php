@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class ConditionSeeder extends Seeder
 {
+
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -19,4 +20,4 @@ class ConditionSeeder extends Seeder
             ['name' => '状態が悪い'],
         ]);
     }
-    }
+}

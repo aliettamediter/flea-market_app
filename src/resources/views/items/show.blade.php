@@ -28,7 +28,7 @@
                 <div class="item-detail__actions">
                     @auth
                         <form method="POST"
-                            action="{{ $isLiked ? route('items.like.destroy', $item) : route('items.like.store', $item) }}">
+                            action="{{ $isLiked ? route('item.like.destroy', $item) : route('item.like.store', $item) }}">
                             @csrf
                             @if($isLiked)
                                 @method('DELETE')
@@ -93,7 +93,7 @@
                 <div class="item-detail__section">
                     <h2 class="item-detail__section-title">商品へのコメント</h2>
                     @auth
-                    <form method="POST" action="{{ route('items.comments.store', $item) }}">
+                    <form method="POST" action="{{ route('item.comments.store', $item) }}">
                         @csrf
                         <textarea class="item-detail__textarea" name="body" placeholder="コメントを入力してください"></textarea>
                         <p class="item-detail__error">@error('body'){{ $message }}@enderror</p>

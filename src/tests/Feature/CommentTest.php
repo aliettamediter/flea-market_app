@@ -22,7 +22,7 @@ class CommentTest extends TestCase
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
-        $response = $this->actingAs($user)->post(route('items.comments.store', $item), [
+        $response = $this->actingAs($user)->post(route('item.comments.store', $item), [
             'body' => 'テストコメント',
         ]);
 
@@ -38,7 +38,7 @@ class CommentTest extends TestCase
     {
         $item = Item::factory()->create();
 
-        $response = $this->post(route('items.comments.store', $item), [
+        $response = $this->post(route('item.comments.store', $item), [
             'body' => 'テストコメント',
         ]);
 
@@ -54,7 +54,7 @@ class CommentTest extends TestCase
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
-        $response = $this->actingAs($user)->post(route('items.comments.store', $item), [
+        $response = $this->actingAs($user)->post(route('item.comments.store', $item), [
             'body' => '',
         ]);
 
@@ -65,7 +65,7 @@ class CommentTest extends TestCase
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
-        $response = $this->actingAs($user)->post(route('items.comments.store', $item), [
+        $response = $this->actingAs($user)->post(route('item.comments.store', $item), [
             'body' => str_repeat('あ', 256),
         ]);
 
