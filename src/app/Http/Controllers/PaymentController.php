@@ -54,12 +54,6 @@ class PaymentController extends Controller
 
     public function success(Item $item)
     {
-        \Log::info('purchase session', [
-            'payment_method' => session('payment_method'),
-            'postal_code'    => session('postal_code'),
-            'address'        => session('address'),
-            'building'       => session('building'),
-        ]);
         Purchase::create([
             'item_id'        => $item->id,
             'buyer_id'       => auth()->id(),

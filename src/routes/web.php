@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sell', [ItemController::class, 'create'])->name('sell');
     Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
 
-    Route::prefix('item/{item}')->name('items.')->group(function () {
+    Route::prefix('item/{item}')->name('item.')->group(function () {
         Route::post('/like', [LikeController::class, 'store'])->name('like.store');
         Route::delete('/like', [LikeController::class, 'destroy'])->name('like.destroy');
         Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

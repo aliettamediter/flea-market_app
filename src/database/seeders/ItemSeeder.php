@@ -13,7 +13,6 @@ class ItemSeeder extends Seeder
     {
         $user = User::first() ?? User::factory()->create();
         $conditions = Condition::pluck('id', 'name');
-
         $items = [
             [
                 'name'        => '腕時計',
