@@ -1,64 +1,83 @@
 # coachtechフリマ
+
 フリマアプリの模擬開発案件です。
 会員登録、ログイン、商品出品、商品購入、コメント、いいね、メール認証などの機能を実装しています。
 
 ## 環境構築
+
 ※ Laravel アプリケーション本体は `src` ディレクトリ配下にあります。
 
 1. リポジトリをクローン
+
 ```bash
 git clone https://github.com/aliettamediter/flea-market_app.git
 cd flea-market_app
 ```
 
 2. 環境変数の設定
+
 ```bash
 cp src/.env.example src/.env
 ```
 
-3. Dockerコンテナの起動
+3. src/.env の以下の項目を書き換える
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=laravel_pass
+
+4. Dockerコンテナの起動
+
 ```bash
 docker-compose up -d
 ```
 
-4. PHPコンテナに入る
+5. PHPコンテナに入る
+
 ```bash
 docker-compose exec php bash
 ```
 
-5. パッケージのインストール
+6. パッケージのインストール
+
 ```
 composer install
 ```
 
-6. アプリケーションキーの生成
+7. アプリケーションキーの生成
+
 ```
 php artisan key:generate
 ```
 
-7. マイグレーションとシーダーの実行
+8. マイグレーションとシーダーの実行
+
 ```
 php artisan migrate --seed
 ```
 
-8. ストレージのシンボリックリンク作成
+9. ストレージのシンボリックリンク作成
+
 ```
 php artisan storage:link
 ```
 
-9. Stripeの設定
+10. Stripeの設定
+ stripeを利用するため、事前にアカウントの作成をAPIキーの取得が必要です。
  1. [Stripe](https://stripe.com/jp) にアカウントを作成してください
  2. ダッシュボードの「開発者」→「APIキー」からテスト用のキーを取得してください
  3. `src/.env` に以下を追加してください：
-`.env` に以下を追加してください：
   STRIPE_KEY=取得したPublishableKey
   STRIPE_SECRET=取得したSecretKey
-  ※ テストカード番号：`4242 4242 4242 4242`（有効期限・CVCは任意の数字）
+  テストカード番号：`4242 4242 4242 4242`（有効期限・CVCは任意の数字）
+
 
 ## メール認証について
 
 本アプリはメール認証にMailhogを使用しています。
-
 1. `http://localhost:8025` にアクセス
 2. 届いた認証メールを開く
 3. 認証リンクをクリック
@@ -67,6 +86,7 @@ php artisan storage:link
 ## テスト実行
 
 ### 1. テスト用データベースの作成
+
 ```
 docker-compose exec mysql bash
 mysql -u root -p
@@ -74,28 +94,30 @@ CREATE DATABASE demo_test;
 ```
 
 ### 2. .env.testingの作成
+
 ```
 cp src/.env .env.testing
 ```
-・２カ所を以下に変更
+src/.env.testing の以下の項目を変更してください。
 APP_ENV=test
 APP_KEY=
-・３カ所を以下に変更
 DB_DATABASE=demo_test
 DB_USERNAME=root
 DB_PASSWORD=root
 
 ### 3. テストを実行
+
 ```
 docker-compose exec php bash
 php artisan key:generate --env=testing
 php artisan config:clear
 php artisan migrate --env=testing
+php artisan test
 ```
 
 ## 機能一覧
 
-- 会員登録・メール認証(Mail.hog)
+- 会員登録・メール認証(Mailhog)
 - ログイン・ログアウト
 - プロフィール設定
 - 商品出品・一覧・詳細
@@ -136,7 +158,7 @@ php artisan migrate --env=testing
 
 ## URL
 
-| URL | 説明 |
+| アクセスURL | 説明 |
 |-----|------|
 | http://localhost | トップページ |
 | http://localhost/register | 会員登録 |
