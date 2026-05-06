@@ -12,10 +12,10 @@
     @endphp
     <div class="item">
         <div class="item__tab">
-            <a href="{{ route('items.index', ['tab' => 'recommend', 'search' => request('search')]) }}"
+            <a href="{{ route('item.index', ['tab' => 'recommend', 'search' => request('search')]) }}"
                 class="item__tab-link {{ $tab === 'recommend' ? 'item__tab-link--active' : '' }}">おすすめ</a>
             @auth
-                <a href="{{ route('items.index', ['tab' => 'mylist', 'search' => request('search')]) }}"
+                <a href="{{ route('item.index', ['tab' => 'mylist', 'search' => request('search')]) }}"
                     class="item__tab-link {{ $tab === 'mylist' ? 'item__tab-link--active' : '' }}">マイリスト</a>
             @endauth
         </div>

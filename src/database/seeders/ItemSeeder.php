@@ -11,7 +11,13 @@ class ItemSeeder extends Seeder
 {
     public function run()
     {
-        $user = User::first() ?? User::factory()->create();
+        $seller = User::factory()->create([
+            'email'             => 'seller@example.com',
+            'email_verified_at' => now(),
+        ]);
+        $seller->profile()->create([
+            'name' => '出品者ユーザー',
+        ]);
         $conditions = Condition::pluck('id', 'name');
         $items = [
             [
@@ -108,7 +114,7 @@ class ItemSeeder extends Seeder
 
         foreach ($items as $data) {
             $item = Item::create([
-                'user_id'      => $user->id,
+                'user_id'      => $seller->id,
                 'name'         => $data['name'],
                 'price'        => $data['price'],
                 'brand'        => $data['brand'],

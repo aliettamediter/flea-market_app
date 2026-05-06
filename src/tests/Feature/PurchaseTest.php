@@ -41,7 +41,7 @@ class PurchaseTest extends TestCase
             'address'        => '東京都渋谷区',
         ]);
 
-        $response->assertRedirect(route('items.index'));
+        $response->assertRedirect(route('item.index'));
     }
     public function test_purchased_item_displays_sold_label()
     {

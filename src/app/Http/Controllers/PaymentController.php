@@ -68,7 +68,7 @@ class PaymentController extends Controller
 
         $item->update(['status' => 'sold']);
 
-        return redirect()->route('items.index');
+        return redirect()->route('item.index');
     }
     public function editAddress(Item $item)
     {

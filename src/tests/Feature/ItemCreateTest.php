@@ -47,6 +47,6 @@ class ItemCreateTest extends TestCase
         $item = \App\Models\Item::where('name', 'テスト商品')->first();
         $this->assertEquals(2, $item->categories->count());
 
-        $response->assertRedirect(route('items.index'));
+        $response->assertRedirect(route('item.index'));
     }
 }

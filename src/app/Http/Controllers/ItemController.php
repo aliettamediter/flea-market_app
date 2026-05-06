@@ -68,6 +68,6 @@ class ItemController extends Controller
             'brand'        => $request->brand,
         ]);
         $item->categories()->attach($request->category_id);
-        return redirect()->route('items.index');
+        return redirect()->route('item.index');
     }
 }
