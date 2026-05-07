@@ -99,7 +99,7 @@ CREATE DATABASE demo_test;
 ```
 cp src/.env .env.testing
 ```
-- src/.env.testing の以下の項目を変更してください。
+src/.env.testing の以下の項目を変更してください。
 - APP_ENV=test
 - APP_KEY=
 - DB_DATABASE=demo_test
