@@ -22,12 +22,12 @@ cp src/.env.example src/.env
 
 3. src/.env の以下の項目を書き換える
 
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=laravel_db
-DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
+- DB_CONNECTION=mysql
+- DB_HOST=mysql
+- DB_PORT=3306
+- DB_DATABASE=laravel_db
+- DB_USERNAME=laravel_user
+- DB_PASSWORD=laravel_pass
 
 4. Dockerコンテナの起動
 
@@ -92,18 +92,19 @@ docker-compose exec mysql bash
 mysql -u root -p
 CREATE DATABASE demo_test;
 ```
+※パスワードは root を入力してください
 
 ### 2. .env.testingの作成
 
 ```
 cp src/.env .env.testing
 ```
-src/.env.testing の以下の項目を変更してください。
-APP_ENV=test
-APP_KEY=
-DB_DATABASE=demo_test
-DB_USERNAME=root
-DB_PASSWORD=root
+- src/.env.testing の以下の項目を変更してください。
+- APP_ENV=test
+- APP_KEY=
+- DB_DATABASE=demo_test
+- DB_USERNAME=root
+- DB_PASSWORD=root
 
 ### 3. テストを実行
 
