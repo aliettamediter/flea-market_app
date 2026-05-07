@@ -108,7 +108,7 @@ CREATE DATABASE demo_test;
 ### 2. .env.testingの作成
 
 ```
-cp src/.env .env.testing
+cp src/.env src/.env.testing
 ```
 src/.env.testing の以下の項目を変更してください。
 - APP_ENV=test
@@ -119,8 +119,13 @@ src/.env.testing の以下の項目を変更してください。
 
 ### 3. テストを実行
 
+PHPコンテナに入る
 ```
 docker-compose exec php bash
+```
+コンテナ内で以下を実行
+
+```
 php artisan key:generate --env=testing
 php artisan config:clear
 php artisan migrate --env=testing
@@ -182,6 +187,8 @@ php artisan test
 
 ## テスト用アカウント
 
+| 項目 | 内容 |
+|------|------|
 | メールアドレス | <test@example.com> |
 | パスワード | password |
 
