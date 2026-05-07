@@ -188,6 +188,24 @@ php artisan test
 ※ `php artisan migrate --seed` 実行後に上記アカウントでログインできます。
 ※ メール認証は不要です（初期データとして認証済みで登録されています）。
 
+## トラブルシューティング
+
+### MySQL エラーが発生した場合
+
+`Tablespace is missing for table laravel_db.migrations` などのエラーが出る場合は、MySQL のデータが破損している可能性があります。
+
+本アプリでは MySQL データを bind mount しているため、`docker-compose down -v` だけではデータは削除されません。
+以下の手順で MySQL データを初期化してください。
+
+```
+docker-compose down
+rm -rf ./docker/mysql/data
+docker-compose up -d
+docker-compose exec php bash
+php artisan migrate --seed
+php artisan storage:link
+```
+
 ## 要件外で追加・変更した実装
 
 以下の内容は要件には記載されていませんが、コーチに相談のうえ、必要と判断して追加した実装です。
