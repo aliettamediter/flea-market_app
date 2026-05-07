@@ -29,6 +29,15 @@ cp src/.env.example src/.env
 - DB_USERNAME=laravel_user
 - DB_PASSWORD=laravel_pass
 
+- MAIL_MAILER=smtp
+- MAIL_HOST=mailhog
+- MAIL_PORT=1025
+- MAIL_USERNAME=null
+- MAIL_PASSWORD=null
+- MAIL_ENCRYPTION=null
+- MAIL_FROM_ADDRESS=<test@example.com>
+- MAIL_FROM_NAME="${APP_NAME}"
+
 4. Dockerコンテナの起動
 
 ```bash
@@ -66,13 +75,15 @@ php artisan storage:link
 ```
 
 10. Stripeの設定
+
  stripeを利用するため、事前にアカウントの作成をAPIキーの取得が必要です。
- 1. [Stripe](https://stripe.com/jp) にアカウントを作成してください
- 2. ダッシュボードの「開発者」→「APIキー」からテスト用のキーを取得してください
- 3. `src/.env` に以下を追加してください：
-  STRIPE_KEY=取得したPublishableKey
-  STRIPE_SECRET=取得したSecretKey
-  テストカード番号：`4242 4242 4242 4242`（有効期限・CVCは任意の数字）
+ [Stripe](https://stripe.com/jp) にアカウントを作成してください
+
+- ダッシュボードの「開発者」→「APIキー」からテスト用のキーを取得してください
+- `src/.env` に以下を追加してください：
+- STRIPE_KEY=取得したPublishableKey
+- STRIPE_SECRET=取得したSecretKey
+- テストカード番号：`4242 4242 4242 4242`（有効期限・CVCは任意の数字）
 
 
 ## メール認証について
